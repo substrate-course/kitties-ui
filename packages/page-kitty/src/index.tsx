@@ -4,6 +4,7 @@
 
 // global app props
 import { AppProps as Props } from '@polkadot/react-components/types';
+import { registry } from '@polkadot/react-api';
 
 // external imports (including those found in the packages/*
 // of this repo)
@@ -11,6 +12,15 @@ import React, { useState } from 'react';
 
 // local imports and components
 import AccountSelector from './AccountSelector';
+
+registry.register({
+  Kitty: '[u8; 16]',
+  KittyIndex: 'u32',
+  KittyLinkedItem: {
+    prev: 'Option<KittyIndex>',
+    next: 'Option<KittyIndex>' // eslint-disable-line
+  }
+});
 
 function TemplateApp ({ className }: Props): React.ReactElement<Props> {
   const [accountId, setAccountId] = useState<string | null>(null);
