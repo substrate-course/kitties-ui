@@ -11,8 +11,6 @@ import React, { useState } from 'react';
 
 // local imports and components
 import AccountSelector from './AccountSelector';
-import SummaryBar from './SummaryBar';
-import Transfer from './Transfer';
 
 function TemplateApp ({ className }: Props): React.ReactElement<Props> {
   const [accountId, setAccountId] = useState<string | null>(null);
@@ -21,9 +19,7 @@ function TemplateApp ({ className }: Props): React.ReactElement<Props> {
     // in all apps, the main wrapper is setup to allow the padding
     // and margins inside the application. (Just from a consistent pov)
     <main className={className}>
-      <SummaryBar />
       <AccountSelector onChange={setAccountId} />
-      <Transfer accountId={accountId} />
     </main>
   );
 }
