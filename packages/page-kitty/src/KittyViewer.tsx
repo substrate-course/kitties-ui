@@ -12,6 +12,10 @@ import { withCalls } from '@polkadot/react-api/hoc';
 import LoadKittyAvatar from './LoadKittyAvatar';
 
 const Wrapper = styled.section``;
+const KittiesWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 
 type Props = {
   kitties_kittiesCount?: BN
@@ -36,7 +40,9 @@ const KittyViewer: React.FC<Props> = ({ kitties_kittiesCount }: Props) => {
       <h2>
           Total kitties count: {count}
       </h2>
-      { kitties }
+      <KittiesWrapper>
+        { kitties }
+      </KittiesWrapper>
     </Wrapper>
   );
 };
