@@ -6,6 +6,7 @@
 import { AppProps as Props } from '@polkadot/react-components/types';
 import { registry } from '@polkadot/react-api';
 import KittyViewer from './KittyViewer';
+import KittyActions from './KittyActions';
 
 // external imports (including those found in the packages/*
 // of this repo)
@@ -31,6 +32,7 @@ function TemplateApp ({ className }: Props): React.ReactElement<Props> {
     // and margins inside the application. (Just from a consistent pov)
     <main className={className}>
       <AccountSelector onChange={setAccountId} />
+      <KittyActions accountId={accountId} />
       <KittyViewer />
     </main>
   );
