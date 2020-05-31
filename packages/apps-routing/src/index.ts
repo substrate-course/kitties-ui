@@ -9,6 +9,7 @@ import appSettings from '@polkadot/ui-settings';
 // When adding here, also ensure to add to Dummy.tsx
 
 import template from './123code';
+import kitty from './kitty';
 import accounts from './accounts';
 import claims from './claims';
 import contracts from './contracts';
@@ -46,7 +47,8 @@ export default function create (t: <T = string> (key: string, text: string, opti
       council(t),
       // TODO Not sure about the inclusion of treasury, parachains & society here
       null,
-      settings(t)
+      settings(t),
+      kitty(t)
     ]
     : [
       // dashboard(t),
@@ -74,6 +76,7 @@ export default function create (t: <T = string> (key: string, text: string, opti
       js(t),
       // hidden
       template(t),
-      i18n(t)
+      i18n(t),
+      kitty(t)
     ];
 }
