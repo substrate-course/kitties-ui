@@ -27,16 +27,19 @@ const Line = styled.div`
   margin: 10px -10px;
 `;
 
-const KittyCard: React.FC<Props> = ({ kitty, owner }: Props) => {
+const KittyCard: React.FC<Props> = ({ kitty, kittyId, owner }: Props) => {
   if (kitty && kitty.isSome) {
     return (
       <Wrapper>
         <StyledKittyAvatar dna={kitty.unwrap().toU8a()} />
         <Line />
-        <label>Owner</label>
-        <AddressMini
-          value={owner && owner.unwrap()}
-        />
+        <label>Kitty ID: {kittyId.toString()}</label>
+        <label>
+           Owner:
+          <AddressMini
+            value={owner && owner.unwrap()}
+          />
+        </label>
       </Wrapper>
     );
   }
