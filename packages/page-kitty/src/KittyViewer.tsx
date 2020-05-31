@@ -2,8 +2,6 @@
 // This software may be modified and distributed under the terms
 // of the Apache-2.0 license. See the LICENSE file for details.
 
-/* eslint-disable camelcase */
-
 import React from 'react';
 import styled from 'styled-components';
 import BN from 'bn.js';
@@ -18,11 +16,11 @@ const KittiesWrapper = styled.div`
 `;
 
 type Props = {
-  kitties_kittiesCount?: BN
+  kittiesCount?: BN
 };
 
-const KittyViewer: React.FC<Props> = ({ kitties_kittiesCount }: Props) => {
-  const count = kitties_kittiesCount ? kitties_kittiesCount.toNumber() : 0;
+const KittyViewer: React.FC<Props> = ({ kittiesCount }: Props) => {
+  const count = kittiesCount ? kittiesCount.toNumber() : 0;
   const kitties = [];
 
   for (let i = 0; i < count; ++i) {
@@ -48,5 +46,5 @@ const KittyViewer: React.FC<Props> = ({ kitties_kittiesCount }: Props) => {
 };
 
 export default withCalls<Props>(
-  'query.kitties.kittiesCount'
+  ['query.kitties.kittiesCount', { propName: 'kittiesCount' }]
 )(KittyViewer);
