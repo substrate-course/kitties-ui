@@ -3,8 +3,16 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import BN from 'bn.js';
 import { Button, TxButton, InputNumber, InputAddress, InputBalance } from '@polkadot/react-components';
+
+const ActionWrapper = styled.details`
+  margin-top: 5px;
+  h2 {
+    display: inline-block;
+  }
+`;
 
 type Props = {
   accountId: string | null
@@ -34,69 +42,82 @@ const KittyActions: React.FC<Props> = ({ accountId }: Props) => {
           </Button.Group>
         </div>
       </div>
-      <h2>Breed Kitty</h2>
-      <div className='ui--row'>
-        <div className='large'>
-          <InputNumber
-            label='First Parent Kitty ID'
-            onChange={setParent1}
-          />
-          <InputNumber
-            label='Second Parent Kitty ID'
-            onChange={setParent2}
-          />
-          <Button.Group>
-            <TxButton
-              accountId={accountId}
-              label='Breed Kitty'
-              params={[parent1, parent2]}
-              tx='kitties.breed'
+      <ActionWrapper>
+        <summary>
+          <h2>Breed Kitty</h2>
+        </summary>
+        <div className='ui--row'>
+          <div className='large'>
+            <InputNumber
+              label='First Parent Kitty ID'
+              onChange={setParent1}
             />
-          </Button.Group>
-        </div>
-      </div>
-      <h2>Transfer Kitty</h2>
-      <div className='ui--row'>
-        <div className='large'>
-          <InputAddress
-            label='recipient address'
-            onChange={setRecipientId}
-          />
-          <InputNumber
-            label='Kitty ID to send'
-            onChange={setTransferKittyId}
-          />
-          <Button.Group>
-            <TxButton
-              accountId={accountId}
-              label='Transfer Kitty'
-              params={[recipientId, transferKittyId]}
-              tx='kitties.transfer'
+            <InputNumber
+              label='Second Parent Kitty ID'
+              onChange={setParent2}
             />
-          </Button.Group>
+            <Button.Group>
+              <TxButton
+                accountId={accountId}
+                label='Breed Kitty'
+                params={[parent1, parent2]}
+                tx='kitties.breed'
+              />
+            </Button.Group>
+          </div>
         </div>
-      </div>
-      <h2>Sell Kitty</h2>
-      <div className='ui--row'>
-        <div className='large'>
-          <InputNumber
-            label='Kitty ID to sell'
-            onChange={setSellKittyId}
-          />
-          <InputBalance
-            label='Kitty Price to sell'
-            onChange={setSellKittyPrice}
-          />
-          <Button.Group>
-            <TxButton
-              accountId={accountId}
-              label='Set Kitty Price'
-              params={[sellKittyId, sellKittyPrice]}
-              tx='kitties.ask'
+      </ActionWrapper>
+      <ActionWrapper>
+        <summary>
+          <h2>Transfer Kitty</h2>
+        </summary>
+
+        <div className='ui--row'>
+          <div className='large'>
+            <InputAddress
+              label='recipient address'
+              onChange={setRecipientId}
             />
-          </Button.Group>
+            <InputNumber
+              label='Kitty ID to send'
+              onChange={setTransferKittyId}
+            />
+            <Button.Group>
+              <TxButton
+                accountId={accountId}
+                label='Transfer Kitty'
+                params={[recipientId, transferKittyId]}
+                tx='kitties.transfer'
+              />
+            </Button.Group>
+          </div>
         </div>
-      </div>
+      </ActionWrapper>
+      <ActionWrapper>
+        <summary>
+          <h2>Sell Kitty</h2>
+        </summary>
+        <div className='ui--row'>
+          <div className='large'>
+            <InputNumber
+              label='Kitty ID to sell'
+              onChange={setSellKittyId}
+            />
+            <InputBalance
+              label='Kitty Price to sell'
+              onChange={setSellKittyPrice}
+            />
+            <Button.Group>
+              <TxButton
+                accountId={accountId}
+                label='Set Kitty Price'
+                params={[sellKittyId, sellKittyPrice]}
+                tx='kitties.ask'
+              />
+            </Button.Group>
+          </div>
+        </div>
+      </ActionWrapper>
     </section>
   );
 };
