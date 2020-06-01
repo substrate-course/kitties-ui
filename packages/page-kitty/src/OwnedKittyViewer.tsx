@@ -46,7 +46,11 @@ const LinkedKittyCardComp = ({ accountKey, item, onNextOwnedKittiesKey }: Linked
   }
 
   if (accountKey[1].isSome) {
-    return <KittyCard kittyId={accountKey[1].unwrap()} />;
+    return <KittyCard
+      accountId={accountKey[0].toString()}
+      kittyId={accountKey[1].unwrap()}
+      showUnlist={true}
+    />;
   }
 
   return null;
