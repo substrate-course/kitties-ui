@@ -28,12 +28,13 @@ const Line = styled.div`
   margin: 10px -10px;
 `;
 
- type Props = WithKittyProps & {
-   showUnlist?: boolean,
-   accountId: string | null,
- };
+type Props = WithKittyProps & {
+  showUnlist?: boolean,
+  showBuy?: boolean,
+  accountId: string | null,
+};
 
-const Price: React.FC<Props> = ({ accountId, kittyId, price, showUnlist }: Props) => {
+const Price: React.FC<Props> = ({ accountId, kittyId, price, showBuy, showUnlist }: Props) => {
   if (price && price.isSome) {
     const value = price.unwrap();
 
@@ -48,6 +49,14 @@ const Price: React.FC<Props> = ({ accountId, kittyId, price, showUnlist }: Props
             tx='kitties.ask'
           />
         }
+        {showBuy &&
+           <TxButton
+             accountId={accountId}
+             label='Buy'
+             params={[kittyId, value]}
+             tx='kitties.buy'
+           />
+        }
       </>
     );
   }
@@ -55,7 +64,7 @@ const Price: React.FC<Props> = ({ accountId, kittyId, price, showUnlist }: Props
   return <label>Not for sale</label>;
 };
 
-const KittyCard: React.FC<Props> = ({ accountId, kitty, kittyId, owner, price, showUnlist }: Props) => {
+const KittyCard: React.FC<Props> = ({ kitty, kittyId, owner, ...others }: Props) => {
   if (kitty && kitty.isSome) {
     const dna = kitty.unwrap().toU8a();
 
@@ -71,7 +80,7 @@ const KittyCard: React.FC<Props> = ({ accountId, kitty, kittyId, owner, price, s
           />
         </label>
         <label>DNA: {u8aToHex(dna)}</label>
-        <Price {...{ accountId, kittyId, price, showUnlist }}/>
+        <Price {...{ kittyId, ...others }}/>
       </Wrapper>
     );
   }
@@ -79,4 +88,4 @@ const KittyCard: React.FC<Props> = ({ accountId, kitty, kittyId, owner, price, s
   return <div>Loading...</div>;
 };
 
-export default withKitty(KittyCard as React.FC<WithKittyProps>);
+export default withKitty(KittyCard as React.FC<WithKittyProps>) as React.ComponentType<Props>;
