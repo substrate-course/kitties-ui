@@ -5,7 +5,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AddressMini } from '@polkadot/react-components';
-import { u8aToHex } from '@polkadot/util';
+import { u8aToHex, formatBalance } from '@polkadot/util';
 import { Balance } from '@polkadot/types/interfaces';
 import { Option } from '@polkadot/types';
 
@@ -38,7 +38,7 @@ const Price: React.FC<PriceProps> = ({ price }: PriceProps) => {
   if (price && price.isSome) {
     const value = price.unwrap();
 
-    return <label>Price: {value}</label>;
+    return <label>Price: {formatBalance(value)}</label>;
   }
 
   return <label>Not for sale</label>;
